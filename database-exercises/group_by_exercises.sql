@@ -70,12 +70,11 @@ ORDER BY COUNT(*) DESC;
 -- Bonus: how many duplicate usernames are there?
 
 
-SELECT COUNT(*)
-FROM employees;
-WHERE (
-	SELECT COUNT(*)
-	FROM employees
-	GROUP BY LOWER(CONCAT(SUBSTR(first_name, 1, 1), SUBSTR(last_name, 1, 4), "_", SUBSTR(birth_date, 6, 2), SUBSTR(birth_date, 3, 2)))
-	ORDER BY COUNT(*) DESC);
-
-	-- not finished!
+SELECT sum(temp.username_count)
+FROM (
+        SELECT CONCAT(LOWER(SUBSTR(first_name, 1, 1)), LOWER(SUBSTR(last_name, 1, 4)), "_", SUBSTR(birth_date, 6, 2), SUBSTR(birth_date, 3, 2)) AS username, COUNT(*) as username_count
+        FROM employees
+        GROUP BY username
+        ORDER BY username_count DESC
+) as temp
+WHERE username_count > 1;
