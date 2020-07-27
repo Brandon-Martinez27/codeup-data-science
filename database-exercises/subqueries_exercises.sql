@@ -32,7 +32,7 @@ GROUP BY title;
 
 
 -- 3. How many people in the employees table are no longer working for the company?
-
+-- WRONG
 SELECT COUNT(DISTINCT emp_no) as no_longer_working
 FROM dept_emp
 WHERE emp_no IN (
@@ -40,6 +40,15 @@ WHERE emp_no IN (
 	FROM employees
 )
 AND to_date <= CURDATE();
+
+--CORRECT
+SELECT COUNT(*)
+FROM employees
+WHERE emp_no NOT IN (
+	SELECT emp_no 
+	FROM dept_emp
+	WHERE to_date > CURDATE()
+);
 
 -- 4. Find all the current department managers that are female.
 
@@ -84,6 +93,8 @@ JOIN (
 JOIN salaries as s
 WHERE s.to_date > CURDATE()
 AND max_s.max_sal - sd_s.sd_sal <= s.salary;
+
+-- What percentage of salaries
 
 -- BONUS
 -- 1. Find all the department names that currently have female managers
