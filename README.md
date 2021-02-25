@@ -20,16 +20,14 @@
 - Tables
 - Statements
 - Clauses
-- Overview
-- Where
-- Order By
-- Limit
+  - Where
+  - Order By
+  - Limit
 - Functions
 - Group By
 - Relationships
-- Overview
-- Indexes
-- Joins
-- Subqueries
+  - Indexes
+  - Joins
+  - Subqueries
 - Temporary Tables
 - Case Statements
